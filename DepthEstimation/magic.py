@@ -10,7 +10,7 @@ import time
 
 t1 = time.time()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-x = [y for y in glob.glob("Images/*.jpg") if "Depth." not in y]
+x = [y for y in glob.glob("testImages/*.jpg") if "Depth." not in y]
 pbar = tqdm.tqdm(total=len(x), colour="red")
 for i in x:
     t1_ = time.time()
