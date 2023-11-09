@@ -1,6 +1,7 @@
 from transformers import GLPNImageProcessor, GLPNForDepthEstimation
 from transformers import DPTImageProcessor, DPTForDepthEstimation
 from colorama import Fore, Style
+from tkinter import filedialog
 from PIL import Image
 import numpy as np
 import torch
@@ -10,9 +11,15 @@ import time
 
 t1 = time.time()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-x = [y for y in glob.glob("testImages/*.jpg") if "Depth." not in y]
-pbar = tqdm.tqdm(total=len(x), colour="red")
-for i in x:
+print("Select the Directory Yo!")
+inImg = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.jpeg *.png *.gif *.bmp *.tiff")])
+imgDir = ('/'.join([x.replace(" ", "~") for x in inImg.split("/")[:-1]])).replace("~", " ") + '/'
+print("---->", imgDir)
+x = [glob.glob(imgDir+y) for y in ['*.jpg', '*.png', '*.tiff', '*.bmp', '*.jpeg']]
+x = sum(x, [])
+y = [z for z in x if "Depth." not in z]
+pbar = tqdm.tqdm(total=len(y), colour="red")
+for i in y:
     t1_ = time.time()
     img  = Image.open(i)
     #processor = DPTImageProcessor.from_pretrained("Intel/dpt-hybrid-midas")
