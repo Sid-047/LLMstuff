@@ -1,0 +1,6 @@
+transformers==4.31.0
+accelerate==0.25.0
+diffusers==0.25.0
+colorama==0.4.6
+torch==2.0.1
+tqdm==4.66.1
