@@ -1,0 +1,4 @@
+tqdm==4.66.1
+torch==2.0.1
+Pillow==10.1.0
+transformers==4.35.1
